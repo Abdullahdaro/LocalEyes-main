@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch} from 'react-router-dom';
+import { Redirect, Route, Switch} from 'react-router-dom';
 import { ThemeProvider} from '@material-ui/core';
 import theme from './CustomTheme';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -21,6 +21,8 @@ dotenv.config()
 const App = () => {
 
     console.log(process.env.REACT_APP_PORT);
+    const user = JSON.parse(localStorage.getItem('profile'));
+
     return (
         <GoogleOAuthProvider clientId={process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_API_TOKEN}>
             <ThemeProvider theme={theme}>
@@ -31,7 +33,7 @@ const App = () => {
                     </Route>
                     <Route path='/discover' exact component={Discover}/>
                     <Route path='/discover/search' exact component={Discover}/>
-                    <Route path='/discover/:customURL' component={PostDetails}/>
+                    <Route path='/discover/:id' component={PostDetails}/>
                     <Route path='/hosts' exact>
                         <Hosts />
                     </Route>
@@ -47,9 +49,7 @@ const App = () => {
                     <Route path='/admin' exact>
                         <Admin />
                     </Route>
-                    <Route path='/auth' exact>
-                        <Auth />
-                    </Route>
+                    <Route path='/auth' exact component={() => (!user ? <Auth /> : <Redirect to="/" />)} />
                 </Switch>
                 <Footer />
             </ThemeProvider>    

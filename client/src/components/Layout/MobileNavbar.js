@@ -11,6 +11,7 @@ import happyMan from '../../images/happyMan.png';
 import { useDispatch } from 'react-redux';
 import { FiLogOut } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 function MobileNavbar() {
     const classes = useStyles();
@@ -75,15 +76,12 @@ function MobileNavbar() {
                             <Link to='/aboutus' className={classes.link}>About Us</Link>
                         </ListItemText>
                     </ListItem>
-                    <ListItem onClick={() => setOpenNavbar(open)}>
+                        <ListItem onClick={() => setOpenNavbar(open)}>
                     </ListItem>
                 </List>
             </Drawer>
             
             <div className={classes.navbarButtons}>
-                <IconButton className={classes.menuIcon} edge="start" onClick={() => setOpenNavbar(!openNavbar)}>
-                    <MenuIcon className={classes.menuIcon}/>
-                </IconButton>
                 <Toolbar>
                         {user ? (
                             <>
@@ -132,20 +130,38 @@ function MobileNavbar() {
                                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                     getContentAnchorEl={null}
-                                >
+                                >   <MenuItem >
+                                        <ListItemIcon>
+                                            <Link to='/mylist' className={classes.linkAvatar}>
+                                                <BookmarkIcon fontSize="small" />
+                                            </Link>
+                                        </ListItemIcon>
+                                        <Link to='/mylist' className={classes.linkAvatar}>
+                                            <p  style={{fontSize: '15px'}}>Mylist</p>
+                                        </Link>
+                                    </MenuItem> 
                                     <MenuItem onClick={logout}>
                                     <ListItemIcon>
-                                        <FiLogOut fontSize="small" />
+                                        <Link className={classes.linkAvatar} >
+                                            <FiLogOut fontSize="miduim" />
+                                        </Link>
                                     </ListItemIcon>
+                                        <Link className={classes.linkAvatar} >
                                         <p style={{fontSize: '15px'}}>Logout</p>
+                                        </Link>
                                     </MenuItem>
                                 </Menu>                               
                             </>
                             ) : ( 
-                            <Link to='/auth'  className={classes.button}><Button className={classes.button}>Sign In</Button></Link>
+                            <Link to='/auth'  className={classes.button}><Button className={classes.button} sx={{ whitespace: "nowrap",
+                              }}>Sign In</Button></Link>
                             
                             )}
-                        </Toolbar>
+                </Toolbar>
+
+                <IconButton className={classes.menuIcon} edge="start" onClick={() => setOpenNavbar(!openNavbar)}>
+                    <MenuIcon className={classes.menuIcon}/>
+                </IconButton>
             </div>
         </>          
     )

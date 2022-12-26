@@ -23,7 +23,13 @@ const postSchema = mongoose.Schema({
     rating: Number,
     tags: [String],
     active: String,
-    customURL: String
+    customURL: String,
+    savedBy: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ],
 });
 
 const postMessage = mongoose.model('Post Message', postSchema);

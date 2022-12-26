@@ -1,24 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import useStyles from './businessStyles';
 import Rating from '@mui/material/Rating';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import { useMediaQuery, useTheme } from '@material-ui/core'
 
-import {useDispatch} from 'react-redux'
-import { likePost } from '../../actions/posts';
 import Box from '@mui/material/Box';
 import { useHistory } from 'react-router-dom';
 import cardBackground from '../../images/cardBackground.png';
 import { CardActions, Button } from '@mui/material';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import { useDispatch, useSelector } from 'react-redux';
+/* import {savePost} from '../../actions/posts'; */
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 const BusinessCard = ({ post }) => {
+    const user = JSON.parse(localStorage.getItem('profile'));
     const classes = useStyles();
     const theme = useTheme();
     const history = useHistory();
-    const dispatch = useDispatch();
+    /* const dispatch = useDispatch(); */
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+    /* const handleLike = async () => {
+        dispatch(savePost(post._id));
+      }; */
 
     const ResponsiveDiv = styled('div')(({ theme }) => ({
         backgroundColor: '#f2fafc',
@@ -40,8 +45,8 @@ const BusinessCard = ({ post }) => {
             paddingLeft: '20px'  
         },
         [theme.breakpoints.up('lg')]: {
-            width: '55%',
-            height: '210px',
+            width: '70%',
+            height: '200px',
             padding: '10px', 
             paddingLeft: '40px'       
         },
@@ -52,6 +57,9 @@ const BusinessCard = ({ post }) => {
         fontWeight: 'Bold',
         padding: '0px',
         margin: '0px',
+        "&:hover": {    
+            cursor: "pointer",
+        },
         [theme.breakpoints.down('md')]: {
             fontSize: "16px",
             marginTop: '5px',
@@ -75,6 +83,9 @@ const BusinessCard = ({ post }) => {
         padding: '0px',
         color: 'rgba(127, 128, 134, 1)',
         marginRight: '10px',
+        "&:hover": {    
+            cursor: "pointer",
+        },
         [theme.breakpoints.down('md')]: {
             fontSize: "10px",
             marginRight: '8px',
@@ -96,6 +107,9 @@ const BusinessCard = ({ post }) => {
         padding: '0px',
         color: 'rgba(1, 173, 198, 1)',
         zIndex: '3',
+        "&:hover": {    
+            cursor: "pointer",
+        },
         [theme.breakpoints.down('md')]: {
             fontSize: "16px",
             position: 'relative',
@@ -122,6 +136,9 @@ const BusinessCard = ({ post }) => {
         borderRadius: '5px',
         objectFit: 'cover',
         zIndex: '100',
+        "&:hover": {    
+            cursor: "pointer",
+        },
         [theme.breakpoints.down('md')]: {
             width: '75px', 
             height: '78px'
@@ -155,19 +172,19 @@ const BusinessCard = ({ post }) => {
     }));
 
     const openPost = () => {
-        history.push(`/discover/${post.customURL}`);   
+        history.push(`/discover/${post._id}`);   
         
     };
 
     return (
         <>
-            <ResponsiveDiv onClick={openPost}>
+            <ResponsiveDiv >
                 <Grid container>
                     <Grid item xs={6} md={6} lg={6}>
                         <Grid container direction="column" justifyContent="space-evenly" alignItems="flex-start">
                             <Grid item xs={3} md={3} lg={3}>
                                 <Box sx={{padding: '0px',marginTop: '0.5em',display: 'flex',alignItems: 'center',}}>
-                                    <SubText>{post.rating}</SubText>
+                                    <SubText onClick={openPost}>{post.rating}</SubText>
                                     {isMobile ? (
                                         <>
                                             <Rating name="rating" defaultValue={post.rating} precision={0.5} size="small" readOnly />
@@ -184,30 +201,29 @@ const BusinessCard = ({ post }) => {
                                 </Box>
                             </Grid>
                             <Grid item xs={3} md={3} lg={3}>
-                                <CardTitle>{post.title}</CardTitle>
+                                <CardTitle onClick={openPost}>{post.title}</CardTitle>
                             </Grid>
                             <Grid item xs={3} md={3} lg={3}>
-                                <SubText className={classes.descriptionText}>{post.description}</SubText>
+                                <SubText className={classes.descriptionText} onClick={openPost}>
+                                    {post.description} 
+                                </SubText>
+                                {/* <CardActions className={classes.CardActions}>
+                                        <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike} title="Add to MyList" >
+                                            <BookmarkIcon size= "small" />
+                                        </Button>
+                                </CardActions> */}
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={3} md={3} lg={3} style={{zIndex: '20'}}>
-                        <BackgroundImage src={cardBackground} alt="Card Background"></BackgroundImage>
-                        <LocationText>0.1 mi</LocationText>
+                        <BackgroundImage src={cardBackground} alt="Card Background" onClick={openPost}></BackgroundImage>
+                        <LocationText onClick={openPost}>0.1 mi</LocationText>
                     </Grid>
                     <Grid item xs={3} md={3} lg={3} sx={{textAlign: 'right', overflow: 'hidden', maxHeight: '100%', zIndex: '30'}}>
-                        <ImageThumbnail src={post.primaryPhoto} alt='Business Thumbnail'></ImageThumbnail>
+                        <ImageThumbnail src={post.primaryPhoto} alt='Business Thumbnail' onClick={openPost}></ImageThumbnail>
                     </Grid>
                 </Grid>
             </ResponsiveDiv>
-           {/*  <CardActions className={classes.CardActions}>
-                                                <Button size='small' color='primary' onClick={() => dispatch(likePost(post._id))}>
-                                                    <ThumbUpAltIcon size='small'></ThumbUpAltIcon>
-                                                    Add to my list 
-                                                    {post.likeCount}
-                                                </Button>
-                                            </CardActions> */}
-            
         </>
     );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from '../components/Admin/AdminStyle';
-import CreateBusiness from '../components/Form/CreateBusiness.js'
+import CreateBusiness from '../components/Form/CreateBusiness'
 import AdminCardList from '../components/Admin/AdminCardList'
 import { useDispatch } from 'react-redux';
 import { getPosts } from '../actions/posts';

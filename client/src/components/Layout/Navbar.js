@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, useMediaQuery, useTheme, Menu, MenuItem, ListItemIcon, IconButton } from '@material-ui/core'
 import { FiLogOut } from 'react-icons/fi';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import useStyles from '../../styles.js';
 import LocalEyesLogo from '../../images/localeyeslogodark.png'
 import MobileNavbar from './MobileNavbar.js';
@@ -12,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Button} from '@material-ui/core';
 import happyMan from '../../images/happyMan.png'
+import {  LOGOUT } from "../../constants/actionTypes";
 
 function Navbar() {
     const theme = useTheme();
@@ -23,7 +25,7 @@ function Navbar() {
 
     //use State for user info
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));   
-    console.log(user);
+    /* console.log(user); */
 
     //dropdown
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -64,8 +66,8 @@ function Navbar() {
 
     //logging out google client
     const logout = () => {
-        dispatch({ type: 'LOGOUT' })
-        history.push('/')
+        dispatch({ type: LOGOUT })
+        /* history.push('/auth') */
         setUser(null);
     };
 
@@ -140,11 +142,25 @@ function Navbar() {
                                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                     getContentAnchorEl={null}
                                 >
+                                    <MenuItem >
+                                        <ListItemIcon>
+                                            <Link to='/mylist' className={classes.linkAvatar}>
+                                                <BookmarkIcon fontSize="small" />
+                                            </Link>
+                                        </ListItemIcon>
+                                        <Link to='/mylist' className={classes.linkAvatar}>
+                                            <p  style={{fontSize: '15px'}}>Mylist</p>
+                                        </Link>
+                                    </MenuItem>
                                     <MenuItem onClick={logout}>
                                     <ListItemIcon>
-                                        <FiLogOut fontSize="small" />
+                                        <Link className={classes.linkAvatar} >
+                                            <FiLogOut fontSize="miduim" />
+                                        </Link>
                                     </ListItemIcon>
+                                        <Link className={classes.linkAvatar} >
                                         <p style={{fontSize: '15px'}}>Logout</p>
+                                        </Link>
                                     </MenuItem>
                                 </Menu>                               
                             </>

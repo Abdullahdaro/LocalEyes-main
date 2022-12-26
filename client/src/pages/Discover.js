@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FourIconGrid from '../components/Layout/FourIconGrid.js';
 import { styled } from '@mui/material/styles';
+
 import BusinessCardList from '../components/Business/BusinessCardList'
 import { useDispatch } from 'react-redux';
 import { getPostsBySearch } from '../actions/posts';
@@ -16,10 +17,7 @@ import Grid from '@mui/material/Grid';
 import { TextField, ToggleButton } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { Box, createStyles, withStyles } from "@material-ui/core";
 import {ToggleButtonGroup} from '@mui/material';
-import Paper from '@material-ui/core';
-
 
 function CustomTextField(props) {
     return (
@@ -409,7 +407,7 @@ const Discover = () => {
             </Modal>
             <BusinessCardList setCurrentId={setCurrentId} />
             <div style={{width: '60vw', margin: 'auto'}}>
-            <Paginate page={page}/>  
+                <Paginate page={page}/>  
             </div>
             
             <FourIconGrid />

@@ -19,7 +19,10 @@ export default makeStyles((theme) => ({
         fontWeight: 'bold',
         gridColumn: 'span 3',
         padding: '0px',
-        margin: '0.25em'
+        margin: '0.25em',
+        "&:hover": {    
+            cursor: "pointer",
+        },
     },
     cardDescription: {
         fontFamily: 'Red Hat Display',
@@ -27,11 +30,18 @@ export default makeStyles((theme) => ({
         gridColumn: 'span 3',
         color: '#7F8086',
         padding: '0px',
-        margin: '0.25em'
+        margin: '0.25em',
+        "&:hover": {    
+            cursor: "pointer",
+        },
     },
     cardActions: {
         display: 'flex',
         justifyContent: 'space-between',
+        "&:hover": {    
+            text: "add to mylist",
+        },
+
       },
     h1: {
         fontFamily: 'Red Hat Display',
@@ -40,12 +50,19 @@ export default makeStyles((theme) => ({
         fontWeight: 'Bold',
         margin: '0px',
         border: '1px solid black',
-        padding: '0px'
+        padding: '0px',
+        "&:hover": {    
+            cursor: "pointer",
+        },
     },
     descriptionText: {
         fontFamily: 'Red Hat Display',
+        display: "flex",
         textDecoration: "none",
         fontSize: "15px",
+        "&:hover": {    
+            cursor: "pointer",
+        },
     },
     ul: {
         justifyContent: 'space-around'

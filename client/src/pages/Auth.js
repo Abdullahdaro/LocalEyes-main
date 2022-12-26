@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { signin, signup } from '../actions/auth'
+import { AUTH } from '../constants/actionTypes'
 
 const initialState = { firstName: '' , lastName: '', email: '' , password:'', confirmPassword:'' }
 
@@ -25,7 +26,7 @@ const Auth = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(isSignup) {
-            dispatch(signup(formData, history))
+            dispatch(signup(formData))
         } else {
             dispatch(signin(formData, history))
         }
@@ -45,7 +46,7 @@ const Auth = () => {
         const token = (res.credential);
 
         try {
-            dispatch({type: 'AUTH', data: {result, token}})
+            dispatch({type: AUTH , data: {result, token}})
 
             history.push('/')
         } catch (error) {
@@ -86,7 +87,13 @@ const Auth = () => {
                 <GoogleLogin 
                     clientId='312355431173-1nnnil8qaajb9is78c6s4h00n3eokcr8.apps.googleusercontent.com'
                     render={(renderProps) => (
-                        <Button className={classes.googleButton} color='primary' fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<AuthIcon />} varient='containe'>
+                        <Button className={classes.googleButton} 
+                        color='primary' 
+                        fullWidth 
+                        onClick={renderProps.onClick} 
+                        disabled={renderProps.disabled} 
+                        startIcon={<AuthIcon />} 
+                        varient='containe'>
                             Google Sign In
                         </Button>
                     )} 

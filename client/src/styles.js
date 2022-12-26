@@ -51,9 +51,25 @@ export default makeStyles((theme) => ({
         color: "#000000",
         fontSize: "15px",
         fontWeight: 'Bold',
-        marginLeft: theme.spacing(5),
-        marginRight: theme.spacing(5),
+        marginLeft: theme.spacing(3),
+        marginRight: theme.spacing(3),
         padding: '5px',
+        "&:hover": {    
+            color: "#01A0C6",
+        },
+        "&:active": {
+            color: "#01A0C6",
+        }
+    },
+    linkAvatar: {
+        fontFamily: 'Red Hat Display',
+        textDecoration: "none",
+        color: "#000000",
+        fontSize: "15px",
+        fontWeight: 'Bold',
+        marginLeft: theme.spacing(0),
+        marginRight: theme.spacing(1),
+        padding: '1px',
         "&:hover": {    
             color: "#01A0C6",
         },
@@ -67,8 +83,8 @@ export default makeStyles((theme) => ({
         color: "#000000",
         fontSize: "20px",
         fontWeight: 'Bold',
-        marginLeft: theme.spacing(5),
-        marginRight: theme.spacing(5),
+        marginLeft: theme.spacing(0),
+        marginRight: theme.spacing(0),
         padding: '10px',
         "&:hover": {    
             color: "#01A0C6",
