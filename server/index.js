@@ -11,7 +11,25 @@ import hostRoutes from './routes/hosts.js'
 import userRoutes from './routes/users.js'
 
 dotenv.config();
+
+const path = require("path")
 const app = express();
+
+const _dirname = path.dirname("")
+const buildPath = path.join(_dirname , "../client/build")
+
+app.use(express.static(buildPath))
+
+app.get("/*", function(req, res) {
+  res.sendFile(
+    path.join(_dirname, "../client/build/index.html"),
+    function(err) {
+      if(err) {
+        res.status(500).send(err);
+      }
+    }
+  )
+})
 
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
@@ -23,6 +41,10 @@ app.use(
 app.use('/discover', postRoutes);
 app.use('/hosts', hostRoutes);
 app.use('/user', userRoutes);
+
+app.get("/", (res, req) => {
+  res.send("App Is Running")
+})
 
 const PORT  = process.env.REACT_APP_PORT || 5000;
 
