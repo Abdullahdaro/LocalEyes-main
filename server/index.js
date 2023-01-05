@@ -1,10 +1,16 @@
-import dotenv from 'dotenv';
 
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import helmet from 'helmet';
+const dotenv = require('dotenv');
+
+
+const express = require('express');
+
+const bodyParser = require('bodyParser');
+
+const mongoose = require('mongoose');
+
+const cors = require('cors');
+
+const helmet = require('helmet');
 
 import postRoutes from './routes/posts.js'
 import hostRoutes from './routes/hosts.js'
