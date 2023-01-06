@@ -25,6 +25,10 @@ app.use('/discover', postRoutes);
 app.use('/hosts', hostRoutes);
 app.use('/user', userRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to my MERN stack app!');
+});
+
 
 const PORT  = process.env.REACT_APP_PORT || 5000;
 
