@@ -25,9 +25,6 @@ app.use('/discover', postRoutes);
 app.use('/hosts', hostRoutes);
 app.use('/user', userRoutes);
 
-app.get("/", (res, req) => {
-  res.send("App Is Running")
-})
 
 const PORT  = process.env.REACT_APP_PORT || 5000;
 
