@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to my MERN stack app!');
 });
 
+app.post('/', (req, res) => {
+  res.sendStatus(201);
+});
+
 
 const PORT  = process.env.REACT_APP_PORT || 5000;
 
